@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # my apps
     'api',
+    'frontend',
+
+    # imported apps
     'rest_framework',
 ]
 
