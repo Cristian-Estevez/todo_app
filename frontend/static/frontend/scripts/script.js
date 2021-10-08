@@ -1,5 +1,8 @@
 buildList();
 
+var activeItem = null;
+
+// from django docs, how to pass csrftoken with ajax
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -17,6 +20,7 @@ function getCookie(name) {
 };
 const csrftoken = getCookie('csrftoken');
 
+// populate front end with DDBB data
 function buildList(){
     var todoList = document.getElementById('todo-list');
     var url = 'http://127.0.0.1:8000/api/task-list/';
@@ -26,6 +30,7 @@ function buildList(){
     .then(function(data){
         console.log('Data: ', data);
 
+        // Creates item for each task in DDBB and adds it to innerHTML
         for (var i in data) {
 
             var item = `
@@ -34,20 +39,38 @@ function buildList(){
                         <span class="title">${data[i].title}</span>
                     </div>
                     <div style="flex:1">
-                        <button class="">Edit</button>
+                        <button class="edit">Edit</button>
                     </div>
                 </div>
             `
             todoList.innerHTML += item;
-        }
+        };
+
+        // Activates Edit function for each task
+        for (var i in data){
+            var editBtn = document.getElementsByClassName('edit')[i];
+            editBtn.addEventListener('click', (function(item){
+                return function(){
+                    editItem(item);
+                };
+            })(data[i]))
+        };
     });
 };
 
+// Add/update task
 var form = document.getElementById('form-wrapper');
 form.addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault(); // prevents auto-submission
     var url = "http://127.0.0.1:8000/api/task-create/";
     var title = document.getElementById('title').value;
+    // Check if is an update
+    if (activeItem != null){
+        var url = `http://127.0.0.1:8000/api/task-update/${activeItem.id}/`;
+        activeItem = null;
+    }
+
+    // Sends post request to backend to add/update task
     fetch(url, {
         method:'POST',
         headers:{
@@ -56,8 +79,17 @@ form.addEventListener('submit', function(e){
         },
         body:JSON.stringify({'title': title})
     }
+    // Refreshes task list and cleans the add form
     ).then(function(response){
         buildList();
         document.getElementById('form').reset();
     })
 });
+
+// Edit existing task
+function editItem(item){
+    console.log('clicked', item);
+    // Populate add form with existing task info
+    activeItem = item;
+    document.getElementById('title').value = activeItem.title;
+};
