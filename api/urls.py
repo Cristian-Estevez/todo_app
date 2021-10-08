@@ -5,4 +5,7 @@ app_name = 'api'
 
 urlpatterns = [
     path('', views.apiOverview, name='api-overview'),
+    path('task-list/', views.taskList, name='task-list'),   
+    path('task-create/', views.taskCreate, name='task-create'),
+    path('task-update/<str:pk>/', views.taskUpdate, name='task-update'),   
 ]
