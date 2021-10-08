@@ -64,7 +64,7 @@ form.addEventListener('submit', function(e){
     e.preventDefault(); // prevents auto-submission
     var url = "http://127.0.0.1:8000/api/task-create/";
     var title = document.getElementById('title').value;
-    // Check if is an update
+    // Check if this is an update or add (if activeItem == null it is an add)
     if (activeItem != null){
         var url = `http://127.0.0.1:8000/api/task-update/${activeItem.id}/`;
         activeItem = null;
