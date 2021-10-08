@@ -35,11 +35,18 @@ function buildList(){
 
             var item = `
                 <div id="task-${i}" class="todo-list flex-wrapper">
+                    <div class="checkbox-orange">
+                        <i class="fas fa-check-square" ></i>
+                    </div>
+                    <div class="checkbox-gray">
+                        <i class="far fa-square"></i>
+                    </div>
                     <div style="flex:7">
                         <span class="title">${data[i].title}</span>
+                        
                     </div>
                     <div style="flex:1">
-                        <button class="edit">Edit</button>
+                        <a href="#" class="edit">Edit</a>
                     </div>
                 </div>
             `

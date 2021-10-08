@@ -1,7 +1,31 @@
-#task-container {
-    max-width: 600px;   
+body {
+    font-family: 'PT Sans', sans-serif;
 }
+
 
 .flex-wrapper {
     display: flex;
+    margin: .7rem;
+}
+
+.checkbox-orange {
+    color: orange !important;
+    position: relative;
+    margin: auto;
+    padding-right: 1rem;
+}
+
+.checkbox-gray {
+    color: gray !important;
+    position: relative;
+    margin: auto;
+    padding-right: 1rem;
+}
+
+.todo-list {
+    max-width: 89%;
+}
+
+.form-control {
+    margin-right: 1rem;
 }
