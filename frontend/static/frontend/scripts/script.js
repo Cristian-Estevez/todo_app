@@ -66,7 +66,7 @@ function buildList(){
 };
 
 // Add/update task
-var form = document.getElementById('form-wrapper');
+var form = document.getElementById('form');
 form.addEventListener('submit', function(e){
     e.preventDefault(); // prevents auto-submission
     var url = "http://127.0.0.1:8000/api/task-create/";

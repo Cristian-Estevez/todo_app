@@ -5,7 +5,20 @@ body {
 
 .flex-wrapper {
     display: flex;
-    margin: .7rem;
+}
+.container {
+    max-width: 600px;
+    border: solid 5px;;
+    border-color: grey;
+
+}
+
+.form-row {
+    max-width: 95%;
+}
+
+.form-control {
+    border-radius: 0;
 }
 
 .checkbox-orange {
@@ -26,6 +39,11 @@ body {
     max-width: 89%;
 }
 
-.form-control {
-    margin-right: 1rem;
+@media screen and (max-width: 430px){
+
+    #form-inputbox{
+        width: 75% !important;
+    }
+
+    
 }

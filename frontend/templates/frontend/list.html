@@ -2,8 +2,8 @@
 <!DOCSTRING html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -15,8 +15,28 @@
         <title>To-Do List</title>
     </head>
     <body>
+        <br>
+        <div class="container">
+            <br>
+            <p id="app-title" style="font-weight: bold;">To-Do List</p>
 
+            <div id="todo-list">
 
+            </div>
+            <br>
+            <form id="form">
+                <div class="form-row " style="justify-content: space-between;">
+                    <div class="form-group form-md-9" style="width: 85%;" id="form-inputbox">
+                        <input id="title" class="form-control" type="text" name="title" placeholder="New Task">
+                    </div>
+                    <div class="form-group form-md-3">
+                        <input id="submit" class="btn form-control" type="submit" value="Add">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+<!-- 
         <div class="container">
             <div class="task-container"> 
                 <p style="font-weight: bold;">To-Do List</p>       
@@ -36,7 +56,7 @@
                     </form>
                 
             </div>
-        </div>
+        </div> -->
 
         <script src="{% static 'frontend/scripts/script.js' %}"></script>
     </body>
