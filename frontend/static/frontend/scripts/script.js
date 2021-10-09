@@ -43,11 +43,13 @@ function buildList(){
                     </div>
                     <div style="flex:7">
                         <span class="title">${data[i].title}</span>
-                        
                     </div>
                     <div style="flex:1">
                         <a href="#" class="edit">Edit</a>
                     </div>
+                    <div style="flex:1">
+						<a href="#" class="delete">Del</button>
+					</div>
                 </div>
             `
             todoList.innerHTML += item;
@@ -60,7 +62,14 @@ function buildList(){
                 return function(){
                     editItem(item);
                 };
-            })(data[i]))
+            })(data[i]));
+
+            var deleteBtn = document.getElementsByClassName('delete')[i];
+            deleteBtn.addEventListener('click', (function(item){
+                return function(){
+                    deleteItem(item);
+                }
+            })(data[i]));
         };
     });
 };
@@ -100,3 +109,17 @@ function editItem(item){
     activeItem = item;
     document.getElementById('title').value = activeItem.title;
 };
+
+// Delete task
+function deleteItem(item){
+    console.log('Delete clicked')
+    fetch(`http://127.0.0.1:8000/api/task-delete/${item.id}/`, {
+        method:'DELETE', 
+        headers:{
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+        }
+    }).then((response) => {
+        buildList()
+    })
+}
