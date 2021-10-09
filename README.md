@@ -1,5 +1,17 @@
 # todo_app
 
+
+# prerequisites
+must have python==3.* installed 
+
+# Installation 
+to setup a virtual environment and the app grant permissions to "todo.sh":
+    sudo chmod 777 todo.sh
+
+execute:
+    source todo.sh
+
+
 # apps and versions required
 
 The back-end is developed using Django Rest Framework:
