@@ -10,6 +10,7 @@ def apiOverview(request):
         'List': '/task-list/',
         'Create': '/task-create/',
         'Update': '/task-update/<str:pk>',
+        'Delete': '/task-delete/<str:pk>',
     }
 
     return Response(api_urls)
@@ -41,3 +42,10 @@ def taskUpdate(request, pk):
     	serializer.save()
     
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def taskDelete(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    
+    return Response("Task deleted successfully!!")

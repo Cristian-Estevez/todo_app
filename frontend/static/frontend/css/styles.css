@@ -2,7 +2,6 @@ body {
     font-family: 'PT Sans', sans-serif;
 }
 
-
 .flex-wrapper {
     display: flex;
 }
@@ -10,11 +9,15 @@ body {
     max-width: 600px;
     border: solid 5px;;
     border-color: grey;
-
 }
 
 .form-row {
     max-width: 95%;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-image: linear-gradient(to bottom, #c0bbbd 0%, #ffffff 100%)!important;
+    color: rgb(71, 70, 70) !important;
 }
 
 .form-control {
@@ -44,6 +47,4 @@ body {
     #form-inputbox{
         width: 75% !important;
     }
-
-    
 }
