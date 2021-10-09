@@ -33,13 +33,17 @@ function buildList(){
         // Creates item for each task in DDBB and adds it to innerHTML
         for (var i in data) {
 
+            // Checkmark
+
+            var checkItem = `<span class="checkbox" ><i class="far fa-square"></i></span>`;
+            if (data[i].completed == true){
+                checkItem = `<span class="checkbox" ><i class="fas fa-check-square" ></i></span>`;
+            };
+
             var item = `
                 <div id="task-${i}" class="todo-list flex-wrapper">
                     <div class="checkbox-orange">
-                        <i class="fas fa-check-square" ></i>
-                    </div>
-                    <div class="checkbox-gray">
-                        <i class="far fa-square"></i>
+                        ${checkItem}
                     </div>
                     <div style="flex:7">
                         <span class="title">${data[i].title}</span>
@@ -55,7 +59,7 @@ function buildList(){
             todoList.innerHTML += item;
         };
 
-        // Activates Edit function for each task
+        // Activates Edit/Delete/Completed function for each task
         for (var i in data){
             var editBtn = document.getElementsByClassName('edit')[i];
             editBtn.addEventListener('click', (function(item){
@@ -68,6 +72,13 @@ function buildList(){
             deleteBtn.addEventListener('click', (function(item){
                 return function(){
                     deleteItem(item);
+                }
+            })(data[i]));
+
+            var checkbox = document.getElementsByClassName('checkbox')[i];
+            checkbox.addEventListener('click', (function(item){
+                return function(){
+                    checkUncheck(item);
                 }
             })(data[i]));
         };
@@ -119,6 +130,22 @@ function deleteItem(item){
             'Content-type':'application/json',
             'X-CSRFToken':csrftoken,
         }
+    }).then((response) => {
+        buildList()
+    })
+}
+
+function checkUncheck(item){
+    console.log('Checkmark clicked')
+
+    item.completed = !item.completed
+    fetch(`http://127.0.0.1:8000/api/task-update/${item.id}/`, {
+        method:'POST', 
+        headers:{
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'title':item.title, 'completed':item.completed})
     }).then((response) => {
         buildList()
     })
