@@ -52,7 +52,7 @@ function buildList(){
                         <a href="#" class="edit">Edit</a>
                     </div>
                     <div style="flex:1">
-						<a href="#" class="delete">Del</button>
+						<a href="#" class="delete">Del</a>
 					</div>
                 </div>
             `
@@ -61,13 +61,14 @@ function buildList(){
 
         // Activates Edit/Delete/Completed function for each task
         for (var i in data){
+            
             var editBtn = document.getElementsByClassName('edit')[i];
             editBtn.addEventListener('click', (function(item){
                 return function(){
                     editItem(item);
                 };
             })(data[i]));
-
+                
             var deleteBtn = document.getElementsByClassName('delete')[i];
             deleteBtn.addEventListener('click', (function(item){
                 return function(){
@@ -131,8 +132,8 @@ function deleteItem(item){
             'X-CSRFToken':csrftoken,
         }
     }).then((response) => {
-        buildList()
-    })
+        buildList();
+    });
 }
 
 function checkUncheck(item){
@@ -147,6 +148,6 @@ function checkUncheck(item){
         },
         body:JSON.stringify({'title':item.title, 'completed':item.completed})
     }).then((response) => {
-        buildList()
-    })
+        buildList();
+    });
 }
