@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import TaskSerializer
-from .models import Task
+from .serializers import TaskSerializer, FolderSerializer
+from .models import Task, Folder
 
 @api_view(['GET'])
 def apiOverview(request):
@@ -49,3 +49,11 @@ def taskDelete(request, pk):
     task.delete()
     
     return Response("Task deleted successfully!!")
+
+@api_view(['GET'])
+def folderList(request):
+    
+    folders = Folder.objects.all()
+    serializer = FolderSerializer(folders, many=True)
+
+    return Response(serializer.data)
