@@ -1,7 +1,5 @@
 buildList();
 
-var activeItem = null;
-
 // from django docs, how to pass csrftoken with ajax
 function getCookie(name) {
     let cookieValue = null;
@@ -20,22 +18,58 @@ function getCookie(name) {
 };
 const csrftoken = getCookie('csrftoken');
 
+// constructs addForm
+function buildAddForm() {
+    var addForm = `
+            <div class="form-row " style="justify-content: space-between;">
+                <div class="form-group form-md-9" style="width: 85%;" id="form-inputbox">
+                    <input id="title" class="form-control" type="text" name="title" placeholder="New Task">
+                </div>
+                <div class="form-group form-md-3">
+                    <input id="submit" class="btn btn-primary border-secondary form-control" type="submit" value="Add">
+                </div>
+            </div>
+        `;
+    document.getElementById('form').innerHTML = addForm;
+}
+
+// render edit form
+function buildEditForm(aForm) {  
+    var editForm =`
+            <div class=" " style="justify-content: space-between;">
+                <div class="form-group form-md-9" style="width: 85%;" id="form-inputbox">
+                    <input id="form-inputbox-a" class="form-control" type="text" placeholder="New Task">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <input id="save" class="btn btn-primary border-secondary form-control" type="submit" value="Save">
+                    </div>
+                    <div class="input-group-btn">
+                        <input id="cancel" class="btn btn-primary border-secondary form-control" type="submit" value="Cancel">
+                    </div>
+                </div>
+            </div>
+            `
+    var dform = document.getElementById('form');
+    dform.innerHTML = '';
+    dform.innerHTML = editForm;
+};
+
 // populate front end with DDBB data
-function buildList(){
+function buildList(){   
+    buildAddForm();
     var todoList = document.getElementById('todo-list');
     var url = 'http://127.0.0.1:8000/api/task-list/';
     todoList.innerHTML = '';
     fetch(url)
     .then((resp) => resp.json())
     .then(function(data){
-        console.log('Data: ', data);
-
+        
         // Creates item for each task in DDBB and adds it to innerHTML
         for (var i in data) {
 
-            // Checkmark
-
-            var checkItem = `<span class="checkbox" ><i class="far fa-square"></i></span>`;
+            // Checkmark or square according to task completed or not
+            var checkItem = `<span class="checkbox" ><i class="far fa-square" style="color: gray !important;"></i></span>`;
             if (data[i].completed == true){
                 checkItem = `<span class="checkbox" ><i class="fas fa-check-square" ></i></span>`;
             };
@@ -86,18 +120,16 @@ function buildList(){
     });
 };
 
-// Add/update task
+// Add task
 var form = document.getElementById('form');
 form.addEventListener('submit', function(e){
     e.preventDefault(); // prevents auto-submission
     var url = "http://127.0.0.1:8000/api/task-create/";
-    var title = document.getElementById('title').value;
-    // Check if this is an update or add (if activeItem == null it is an add)
-    if (activeItem != null){
-        var url = `http://127.0.0.1:8000/api/task-update/${activeItem.id}/`;
-        activeItem = null;
-    }
+    try {
+        var title = document.getElementById('title').value;
+    } catch {
 
+    }
     // Sends post request to backend to add/update task
     fetch(url, {
         method:'POST',
@@ -116,11 +148,32 @@ form.addEventListener('submit', function(e){
 
 // Edit existing task
 function editItem(item){
-    console.log('clicked', item);
-    // Populate add form with existing task info
-    activeItem = item;
-    document.getElementById('title').value = activeItem.title;
+    var container = document.getElementById('todo-list');
+    container.innerHTML = '';
+       
+    buildEditForm();
+
+    document.getElementById('form-inputbox-a').value = item.title;
+
+    var identifier = item.id
+    var saveBtn = document.getElementById('save');
+    saveBtn.addEventListener('click', function(){
+        executeUpdate(item);}, false);    
 };
+
+function executeUpdate(item){
+    var url = `http://127.0.0.1:8000/api/task-update/${item.id}/`;
+    var title = document.getElementById('form-inputbox-a').value;
+
+    fetch(url, {
+        method:'POST',
+        headers:{
+            'Content-type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'title': title})
+    });
+}
 
 // Delete task
 function deleteItem(item){
@@ -135,7 +188,7 @@ function deleteItem(item){
         buildList();
     });
 }
-
+// Mark completed
 function checkUncheck(item){
     console.log('Checkmark clicked')
 

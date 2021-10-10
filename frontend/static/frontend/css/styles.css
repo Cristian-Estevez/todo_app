@@ -15,6 +15,10 @@ body {
     max-width: 95%;
 }
 
+.input-group-btn {
+    margin: .5rem !important;
+}
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-image: linear-gradient(to bottom, #c0bbbd 0%, #ffffff 100%)!important;
     color: rgb(71, 70, 70) !important;
