@@ -31,6 +31,8 @@ function buildAddForm() {
             </div>
         `;
     document.getElementById('form').innerHTML = addForm;
+    var editTitle = document.getElementById('app-title');
+    editTitle.innerHTML = `To-Do List`;
 }
 
 // render edit form
