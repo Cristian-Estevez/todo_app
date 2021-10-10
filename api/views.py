@@ -40,6 +40,7 @@ def taskCreate(request, pk):
 def taskUpdate(request, folder_pk, pk):
     folder = Folder.objects.get(id=folder_pk)
     task = folder.task_set.get(id=pk)
+    request.data["folder"] = folder_pk
     serializer = TaskSerializer(instance=task, data=request.data)
 
     if serializer.is_valid():
