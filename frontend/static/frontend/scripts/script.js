@@ -23,6 +23,10 @@ function buildFolderList() {
     buildFolderForm();
     var todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
+
+    var appTitle = document.getElementById('app-title');
+    appTitle.innerHTML = "Folders";
+
     var url = 'http://127.0.0.1:8000/api/folder-list/';
     fetch(url)
     .then((resp) => resp.json())
@@ -46,6 +50,15 @@ function buildFolderList() {
             todoList.innerHTML += folderItem;
         }
 
+        for (var i in data) {
+
+            var deleteFolderBtn = document.getElementsByClassName('remove')[i];
+            deleteFolderBtn.addEventListener('click', (function(folderItem){
+                return function() {
+                    removeFolder(folderItem);
+                };
+            })(data[i]));
+        };
         
     }
     )
@@ -83,4 +96,17 @@ function buildFolderForm(){
             document.getElementById('form').reset();
         });
         });
+};
+
+function removeFolder(folderItem) {
+    console.log('Remove Folder clicked');
+    fetch(`http://127.0.0.1:8000/api/folder-delete/${folderItem.id}/`, {
+        method:'DELETE', 
+        headers:{
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+        }
+    }).then((response) => {
+      buildFolderList();  
+    });
 };
