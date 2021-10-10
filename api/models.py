@@ -8,7 +8,7 @@ class Folder(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ['-pk']
 
 class Task(models.Model):
     title = models.CharField(max_length=300)
