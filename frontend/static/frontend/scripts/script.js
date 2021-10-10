@@ -129,42 +129,39 @@ function buildTaskList(folder) {
                 };
             })(data[i]));
                 
+            var deleteBtn = document.getElementsByClassName('delete')[i];
+            deleteBtn.addEventListener('click', (function(item){
+                return function(){
+                    deleteItem(item);
+                }
+            })(data[i]));
             
         };
 
-        // add task
         
+        
+        
+        // add task        
         var addTaskBtn = document.getElementById('add-task');
         addTaskBtn.addEventListener('click', function(){           
-                createTask() });
-
-
-        // var form = document.getElementById('form');
-        // form.addEventListener('submit', function(e){
-        //     e.preventDefault(); // prevents auto-submission
-        //     var url = `http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-create/`;
-        //     var title = document.getElementById('title').value;
-        //     // Sends post request to backend to add/update task
-        //     fetch(url, {
-        //         method:'POST',
-        //         headers:{
-        //             'Content-type': 'application/json',
-        //             'X-CSRFToken': csrftoken,
-        //         },
-        //         body:JSON.stringify({'title': title})
-        //     }
-        //     // Refreshes task list and cleans the add form
-        //     ).then(function(response){
-        //         buildTaskList(currentFolder);
-        //         document.getElementById('form').reset();
-        //     })
-        // });
-
-
-
-
+                createTask() 
+            });        
     });
 };
+
+// Delete task
+function deleteItem(item){
+    console.log('Delete clicked')
+    fetch(`http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-delete/${item.id}/`, {
+        method:'DELETE', 
+        headers:{
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+        }
+    }).then((response) => {
+        buildTaskList(currentFolder);
+    });
+}
 
 function createTask(){
     var title = document.getElementById('task-title').value;
@@ -193,9 +190,10 @@ function editItem(item){
     var identifier = item.id
     var saveBtn = document.getElementById('save');
     saveBtn.addEventListener('click', function(){
-        executeUpdate(item);}, false);
-    
-      
+        executeUpdate(item);}, false)
+        .then((response) => {
+            buildTaskList(currentFolder);
+        });      
 };
 
 // render edit form
