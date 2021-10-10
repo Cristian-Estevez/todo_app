@@ -34,7 +34,7 @@ function buildAddForm() {
 }
 
 // render edit form
-function buildEditForm(aForm) {  
+function buildEditForm() {  
     var editForm =`
             <div class=" " style="justify-content: space-between;">
                 <div class="form-group form-md-9" style="width: 85%;" id="form-inputbox">
@@ -151,7 +151,9 @@ function editItem(item){
     var container = document.getElementById('todo-list');
     container.innerHTML = '';
        
-    buildEditForm();
+    buildEditForm(item.title);
+    var editTitle = document.getElementById('app-title');
+    editTitle.innerHTML = `Editing Task: "${item.title}"`;
 
     document.getElementById('form-inputbox-a').value = item.title;
 
