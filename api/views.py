@@ -30,7 +30,7 @@ def taskList(request, pk):
 def taskCreate(request, pk):
     request.data['folder'] = pk
     serializer = TaskSerializer(data=request.data)
-
+    print(request.data)
     if serializer.is_valid():
         serializer.save()
     

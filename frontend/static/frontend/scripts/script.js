@@ -133,31 +133,51 @@ function buildTaskList(folder) {
         };
 
         // add task
-        var form = document.getElementById('form');
-        form.addEventListener('submit', function(e){
-            e.preventDefault(); // prevents auto-submission
-            var url = `http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-create/`;
-            var title = document.getElementById('title').value;
-            // Sends post request to backend to add/update task
-            fetch(url, {
-                method:'POST',
-                headers:{
-                    'Content-type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                },
-                body:JSON.stringify({'title': title})
-            }
-            // Refreshes task list and cleans the add form
-            ).then(function(response){
-                buildTaskList(currentFolder);
-                document.getElementById('form').reset();
-            })
-        });
+        
+        var addTaskBtn = document.getElementById('add-task');
+        addTaskBtn.addEventListener('click', function(){           
+                createTask() });
+
+
+        // var form = document.getElementById('form');
+        // form.addEventListener('submit', function(e){
+        //     e.preventDefault(); // prevents auto-submission
+        //     var url = `http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-create/`;
+        //     var title = document.getElementById('title').value;
+        //     // Sends post request to backend to add/update task
+        //     fetch(url, {
+        //         method:'POST',
+        //         headers:{
+        //             'Content-type': 'application/json',
+        //             'X-CSRFToken': csrftoken,
+        //         },
+        //         body:JSON.stringify({'title': title})
+        //     }
+        //     // Refreshes task list and cleans the add form
+        //     ).then(function(response){
+        //         buildTaskList(currentFolder);
+        //         document.getElementById('form').reset();
+        //     })
+        // });
 
 
 
 
     });
+};
+
+function createTask(){
+    var title = document.getElementById('task-title').value;
+    var url = `http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-create/`;
+    fetch(url, {
+        method:'POST',
+        headers:{
+            'Content-type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'title': title})
+    });
+    buildTaskList(currentFolder);
 };
 
 function editItem(item){
@@ -220,10 +240,10 @@ function buildTaskForm(folderName) {
     var taskForm =`
             <div class="form-row " style="justify-content: space-between;">
                 <div class="form-group form-md-9" style="width: 85%;" id="form-inputbox">
-                    <input id="title" class="form-control" type="text" name="title" placeholder="New Task">
+                    <input id="task-title" class="form-control" type="text" name="title" placeholder="New Task">
                 </div>
                 <div class="form-group form-md-3">
-                    <input id="submit" class="btn btn-primary border-secondary form-control" type="submit" value="Add">
+                    <input id="add-task" class="btn btn-primary border-secondary form-control" type="submit" value="Add">
                 </div>
             </div>
     `;
