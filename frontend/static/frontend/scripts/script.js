@@ -135,12 +135,16 @@ function buildTaskList(folder) {
                     deleteItem(item);
                 }
             })(data[i]));
+
+            var checkbox = document.getElementsByClassName('checkbox')[i];
+            checkbox.addEventListener('click', (function(item){
+                return function(){
+                    checkUncheck(item);
+                }
+            })(data[i]));
             
         };
 
-        
-        
-        
         // add task        
         var addTaskBtn = document.getElementById('add-task');
         addTaskBtn.addEventListener('click', function(){           
@@ -182,8 +186,15 @@ function editItem(item){
     container.innerHTML = '';
        
     buildEditForm();
+
+
     var editTitle = document.getElementById('app-title');
     editTitle.innerHTML = `Editing Task: "${item.title}"`;
+
+    var cancelBtn = document.getElementById('cancel');
+    cancelBtn.addEventListener('click', function(){
+        buildTaskList(currentFolder);
+    });
 
     document.getElementById('form-inputbox-a').value = item.title;
 
@@ -193,7 +204,7 @@ function editItem(item){
         executeUpdate(item);}, false)
         .then((response) => {
             buildTaskList(currentFolder);
-        });      
+        });   
 };
 
 // render edit form
@@ -216,6 +227,7 @@ function buildEditForm() {
     var dform = document.getElementById('form');
     dform.innerHTML = '';
     dform.innerHTML = editForm;
+
 };
 
 function executeUpdate(item){
@@ -295,5 +307,22 @@ function removeFolder(folderItem) {
         }
     }).then((response) => {
       buildFolderList();  
+    });
+};
+
+// Mark completed
+function checkUncheck(item){
+    console.log('Checkmark clicked')
+
+    item.completed = !item.completed
+    fetch(`http://127.0.0.1:8000/api/folder/${currentFolder.id}/task-update/${item.id}/`, {
+        method:'POST', 
+        headers:{
+            'Content-type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'title':item.title, 'completed':item.completed})
+    }).then((response) => {
+        buildTaskList(currentFolder);
     });
 };
