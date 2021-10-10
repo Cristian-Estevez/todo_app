@@ -7,10 +7,13 @@ from .models import Task, Folder
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'List': '/task-list/',
-        'Create': '/task-create/',
-        'Update': '/task-update/<str:pk>',
-        'Delete': '/task-delete/<str:pk>',
+        'Folder List': '/folder-list/',
+        'Folder Create': '/folder-create/',
+        'Folder Delete': '/folder-delete/<str:pk>/',
+        'Task List': '/folder/<str:pk>/task-list/',
+        'Task Create': '/folder/<str:pk>/task-create/',
+        'Task Update': '/folder/<str:folder_pk>/task-update/<str:pk>',
+        'Task Delete': '/folder/<str:folder_pk>/task-delete/<str:pk>',
     }
 
     return Response(api_urls)
@@ -25,6 +28,7 @@ def taskList(request, pk):
 
 @api_view(['POST'])
 def taskCreate(request, pk):
+    request.data['folder'] = pk
     serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():
@@ -33,8 +37,9 @@ def taskCreate(request, pk):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def taskUpdate(request, pk):
-    task = Task.objects.get(id=pk)
+def taskUpdate(request, folder_pk, pk):
+    folder = Folder.objects.get(id=folder_pk)
+    task = folder.task_set.get(id=pk)
     serializer = TaskSerializer(instance=task, data=request.data)
 
     if serializer.is_valid():
@@ -43,8 +48,9 @@ def taskUpdate(request, pk):
     return Response(serializer.data)
 
 @api_view(['DELETE'])
-def taskDelete(request, pk):
-    task = Task.objects.get(id=pk)
+def taskDelete(request, folder_pk, pk):
+    folder = Folder.objects.get(id=folder_pk)
+    task = folder.task_set.get(id=pk)
     task.delete()
     
     return Response("Task deleted successfully!!")
@@ -66,3 +72,11 @@ def folderCreate(request):
         serializer.save()
     
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def folderDelete(request, pk):
+
+    folder = Folder.objects.get(id=pk)
+    folder.delete()
+    
+    return Response("Folder deleted successfully!!")  
