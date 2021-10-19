@@ -1,0 +1,64 @@
+body {
+  font-family: 'PT Sans', sans-serif;
+}
+
+p a {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.flex-wrapper {
+  display: flex;
+}
+.container {
+  max-width: 600px;
+  border: solid 5px;;
+  border-color: grey;
+}
+
+.form-row {
+  width: 95%;
+  justify-content: space-between;
+}
+
+.input-group-btn {
+  margin: .5rem !important;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-image: linear-gradient(to bottom, #c0bbbd 0%, #ffffff 100%)!important;
+  color: rgb(71, 70, 70) !important;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.checkbox-orange {
+  color: orange !important;
+  position: relative;
+  margin: auto;
+  padding-right: 1rem;
+}
+
+.checkbox-gray {
+  color: gray !important;
+  position: relative;
+  margin: auto;
+  padding-right: 1rem;
+}
+
+.todo-list {
+  max-width: 89%;
+}
+
+#form-inputbox{
+  width: 83% !important;
+}
+
+@media screen and (max-width: 430px){
+
+  #form-inputbox{
+      width: 75% !important;
+  }
+}
