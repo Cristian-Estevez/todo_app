@@ -6,7 +6,7 @@ must have python==3.* installed
 
 # Installation 
 clone repository
-    git clone https://Cristian-Estevez/todo_list.git
+    git clone https://github.com/cristian-estevez/todo_app.git
 
 move into "todo_app" folder:
     cd todo_app
