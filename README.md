@@ -21,6 +21,17 @@ execute:
 open your web browser and go to:
     http://127.0.0.1:8000/
 
+
+# If you want to use The react front end:
+cd into fron_with_react
+run these commands:
+
+npm install
+npm install
+
+and the app will start in browser automatically
+
+
 # apps and versions required
 Python==3.9.7
 asgiref==3.4.1

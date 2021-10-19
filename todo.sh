@@ -13,5 +13,5 @@ python manage.py makemigrations
 python manage.py migrate
 
 echo "Starting local server"
-python manage.py runserver && ./front_with_react/npm start
+python manage.py runserver
 
