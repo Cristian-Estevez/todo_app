@@ -6,8 +6,7 @@ echo "Python virtual env created successfully"
 echo "Virtual environment activated successfully"
 
 echo prepearing python libraries for installing:
-pip install Django==3.2.8 djangorestframework==3.12.4
-
+pip install Django==3.2.8 djangorestframework==3.12.4 django-cors-headers==3.10.0
 
 echo "setting up database:"
 python manage.py makemigrations

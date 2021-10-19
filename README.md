@@ -28,6 +28,8 @@ Django==3.2.8
 pytz==2021.3
 sqlparse==0.4.2
 djangorestframework==3.12.4
+django-cors-headers==3.10.0
+
 
 nodeJs==v10.19.0
 npm==8.1.0
