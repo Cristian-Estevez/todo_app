@@ -14,6 +14,5 @@ python manage.py makemigrations
 python manage.py migrate
 
 echo "Starting local server"
-python manage.py runserver
+python manage.py runserver && ./front_with_react/npm start
 
-echo "Please open 127.0.0.1:8000 in your web browser."

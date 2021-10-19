@@ -2,7 +2,8 @@
 
 
 # prerequisites
-must have python==3.* installed 
+must have python==3.*, nodeJs, npm, create-react-app installed 
+
 
 # Installation 
 clone repository
@@ -27,6 +28,10 @@ Django==3.2.8
 pytz==2021.3
 sqlparse==0.4.2
 djangorestframework==3.12.4
+
+nodeJs==v10.19.0
+npm==8.1.0
+create-react-app==4.0.3
 
 # Database engine 
 sqlite3
