@@ -21,6 +21,7 @@ export function useFolders() {
       case 'delete':
         setFolders(folders.filter((item) => item.id !== folder.id));
         break;
+      default:
       case 'add':
         folders.push(folder);
         setFolders(folders);
