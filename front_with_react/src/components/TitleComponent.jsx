@@ -1,5 +1,3 @@
-import { useFolders } from '../hooks/useFolders';
-
 export default function TitleComponent({ viewFolderList, activeFolder }) {
   return (
     <h1
