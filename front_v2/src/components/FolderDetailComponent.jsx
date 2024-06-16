@@ -8,6 +8,7 @@ import {
   updateTask
 } from '../services/taskServices';
 import { useTasks } from '../hooks/useTasks';
+import IconButton from './buttons/IconButton';
 
 export default function FolderDetailComponent({ activeFolder }) {
   const [newTaskName, setNewTaskName] = useState('');
@@ -82,64 +83,61 @@ export default function FolderDetailComponent({ activeFolder }) {
 
   return (
     <>
-      <div id='todo-list'>
-        {tasks?.map(function (task, index) {
-          return (
-            <div
-              key={index}
-              className='todo-list flex-wrapper'
-            >
-              <div
-                className='checkbox-orange'
-                onClick={() => toggleTaskDone({ task })}
+      <table className='w-full my-4'>
+        <thead>
+          <tr>
+            <th className='text-start w-1/12'>Completed</th>
+            <th className='text-start w-9/12'>Name</th>
+            <th className='text-center w-2/12'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks?.map(function (task, index) {
+            return (
+              <tr
+                key={index}
               >
-                {task.completed == false ? (
-                  <span className='checkbox-gray'>
-                    <i
-                      className='far fa-square'
-                      styles='color: rgb(131, 130, 130) !important;'
-                    ></i>
-                  </span>
-                ) : (
-                  <span className='checkbox-orange'>
-                    <i className='fas fa-check-square'></i>
-                  </span>
-                )}
-              </div>
-              <div style={{ flex: 7 }}>
-                <span
-                  className='title'
-                  name='folder-name'
+                <td
+                  className='checkbox-orange'
+                  onClick={() => toggleTaskDone({ task })}
                 >
-                  {' '}
-                  - {tasks[index].title}
-                </span>
-              </div>
-              <div style={{ flex: 2 }}>
-                <a
-                  href='#'
-                  onClick={() => {
-                    setNewTaskName(task.title);
-                    setEditingTask({ task });
-                  }}
-                  className='view-items'
+                  {task.completed == false ? (
+                    <IconButton
+                      icon="check_box_outline_blank"
+                      className="text-gray-600"
+                    />
+                  ) : (
+                    <IconButton 
+                      icon="check_box"
+                      className="text-yellow-700"
+                    />
+                  )}
+                </td>
+                <td 
+                  className='text-start'
                 >
-                  Edit
-                </a>
-              </div>
-              <div style={{ flex: 1 }}>
-                <a
-                  href='#'
-                  onClick={() => deleteTask({ taskId: task.id })}
-                  className='remove'
-                >
-                  Del
-                </a>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                  {tasks[index].title}
+                </td>
+                <td>
+                  <IconButton
+                    onClick={() => {
+                      setNewTaskName(task.title);
+                      setEditingTask({ task });
+                    }}
+                    icon="edit"
+                  />
+                  <IconButton
+                    href='#'
+                    onClick={() => deleteTask({ taskId: task.id })}
+                    className='text-red-600'
+                    icon="delete"
+                  />
+                </td>
+              </tr>
+            );
+          })}
+      </tbody>
+    </table>
 
       <OneInputFormComponent
         handleChange={handleChange}
