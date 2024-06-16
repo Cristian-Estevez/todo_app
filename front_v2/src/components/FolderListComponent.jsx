@@ -49,20 +49,28 @@ export default function FolderListComponent({
 
   return (
     <>
-      <section id='todo-list'>
-        {folders.map(function (folder) {
-          return (
-            <FolderItemComponent
-              key={folder.id}
-              folder={folder}
-              removeFolder={() => removeFolder(folder)}
-              viewFolderDetail={() => {
-                viewFolderDetail(folder);
-              }}
-            />
-          );
-        })}
-      </section>
+      <table className='w-full my-4'>
+        <thead>
+          <tr>
+            <th className='text-start w-10/12'>Name</th>
+            <th className='text-center w-1/12'>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {folders.map(function (folder) {
+            return (
+              <FolderItemComponent
+                key={folder.id}
+                folder={folder}
+                removeFolder={() => removeFolder(folder)}
+                viewFolderDetail={() => {
+                  viewFolderDetail(folder);
+                }}
+              />
+            );
+          })}
+        </tbody>
+      </table>
 
       <OneInputFormComponent
         inputValue={newFolderName}

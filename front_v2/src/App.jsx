@@ -1,4 +1,6 @@
-import './App.css';
+import './App.css'
+import 'material-icons/iconfont/filled.css';
+import 'material-icons/iconfont/outlined.css';
 
 import TitleComponent from './components/TitleComponent';
 import FolderListComponent from './components/FolderListComponent';
@@ -20,8 +22,7 @@ export default function App() {
 
   return (
     <main
-      id='container'
-      className='container'
+      className='flex flex-col border-2 p-4 border-emerald-500 bg-emerald-500 bg-opacity-50 rounded-lg'
     >
       <TitleComponent
         viewFolderList={viewFolderList}
