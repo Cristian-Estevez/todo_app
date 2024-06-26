@@ -1,47 +1,76 @@
-# todo_app
+# Todo App
 
-### In linux environments
+A simple todo application with Django and React frontend.
+The React frontend introduces a newer user experience design while maintaining the same functionality.
 
-# prerequisites
-must have python==3.*, nodeJs, npm installed 
+### Prerequisites
 
-# Installation 
-clone repository
-    git clone https://github.com/cristian-estevez/todo_app.git
+#### Make sure you have the following installed :
 
-move into "todo_app" folder:
-    cd todo_app
+- Python==3.\*
+- Node.js(\*)
+- npm(\*)
 
-then grant permissions to "todo.sh" file:
-    sudo chmod 777 todo.sh
+(\*) These are optional for using the new React UI.
 
-execute:
-    source todo.sh
+### Installation in Linux Environments
 
-open your web browser and go to:
-    http://127.0.0.1:8000/
+#### Clone repository:
 
-# If you want to use The react front end:
-cd into fron_with_react
-run these commands:
+```sh
+git clone https://github.com/cristian-estevez/todo_app.git
+```
 
+#### Move into "todo_app" folder:
+
+```sh
+cd todo_app
+```
+
+#### If needed, grant permissions to "todo.sh" file:
+
+```sh
+sudo chmod 777 todo.sh
+```
+
+#### Execute:
+
+```sh
+source todo.sh
+```
+
+- This will create a virtual environment for the python libraries not to be installed globally, then install the libraries needed, run migrations and start de dev server.
+
+#### Open your web browser and go to:
+
+```
+http://127.0.0.1:8000/
+```
+
+### If you want to use the React frontend:
+
+#### While the Django web server is runing navigate to the "front_v2" directory:
+
+```sh
+cd front_v2
+```
+
+#### Run:
+
+```sh
 npm install
+```
 
-and the app will start in browser automatically
+The app will start automatically in your browser.
 
-# apps and versions required
-Python==3.9.7
-asgiref==3.4.1
-Django==3.2.8
-pytz==2021.3
-sqlparse==0.4.2
-djangorestframework==3.12.4
-django-cors-headers==3.10.0
+#### If it doesn't:
 
+```
+npm run dev
+```
 
-nodeJs==v10.19.0
-npm==8.1.0
-create-react-app==4.0.3
+#### And then open your web browser and go to:
 
-# Database engine 
-sqlite3
+```
+http://127.0.0.1:5173/
+```
