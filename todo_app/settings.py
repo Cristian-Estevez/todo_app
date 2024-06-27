@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'
+CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:8000']
 
 # Application definition
 
