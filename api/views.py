@@ -19,8 +19,8 @@ def apiOverview(request):
 
 @api_view(['POST'])
 def taskList(request):
-    folder = Folder.objects.get(pk=request.data['folderId'])
-    tasks = folder.task_set.all().order_by('-id')
+    folder = Folder.objects.get(pk=request.data['folderId'], deleted=False) # improve this verification
+    tasks = folder.task_set.filter(deleted=False).order_by('-id')
     serializer = TaskSerializer(tasks, many=True)
     
     return Response(serializer.data)
@@ -54,13 +54,14 @@ def taskUpdate(request):
 def taskDelete(request):
     folder = Folder.objects.get(id=request.data['folderId'])
     task = folder.task_set.get(id=request.data['taskId'])
-    task.delete()
+    task.deleted = True
+    task.save()
     
     return Response("Task deleted successfully!!")
 
 @api_view(['GET'])
 def folderList(request):
-    folders = Folder.objects.all()
+    folders = Folder.objects.filter(deleted=False)
     serializer = FolderSerializer(folders, many=True)
 
     return Response(serializer.data)
@@ -76,6 +77,7 @@ def folderCreate(request):
 @api_view(['DELETE'])
 def folderDelete(request):
     folder = Folder.objects.get(id=request.data['id'])
-    folder.delete()
+    folder.deleted = True
+    folder.save()
 
     return Response("Folder deleted successfully!!")
