@@ -31,7 +31,7 @@ SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS in production
 CSRF_COOKIE_HTTPONLY = True  # Set to True for security reasons in production
-CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 # Application definition
 
@@ -62,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 CORS_ORIGIN_ALLOW_ALL = True
 

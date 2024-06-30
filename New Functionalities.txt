@@ -6,20 +6,22 @@ Add categories
 
 Add filtering
 
-Logic  deletion instead of real
+Logic  deletion instead of real !DONE
 
 Change favicon
 
 Provide option for a noded todo list.
 
-Test using npm why doesnt start automatically.
+Test using npm why doesn't start automatically.
 
 Make Dockerable.
 
 Make it a cellphone app.
 
-Send via email.
+Shera by email.
 
-Add description to task/folder.
+Add description to tasks and folders.
 
-Automate react FE and eliminate legacy.
+Automate react FE star and eliminate legacy FE.
+
+Remove django Admin !DONE
