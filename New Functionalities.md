@@ -1,0 +1,29 @@
+- ## Improvements:
+
+  - Improve UX UI
+
+  - Add authentication
+
+  - Add categories
+
+  - Add filtering
+
+  - ~~Logic deletion instead of real~~
+
+  - ~~Change favicon~~
+
+  - Provide option for a noded todo list.
+
+  - Test using npm why doesn't start automatically.
+
+  - Make Dockerable.
+
+  - Make it a cellphone app.
+
+  - Share by email.
+
+  - Add description to tasks and folders.
+
+  - Automate react FE star and eliminate legacy FE.
+
+  - ~~Remove django Admin~~
