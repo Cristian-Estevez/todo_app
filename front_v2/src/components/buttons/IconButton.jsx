@@ -1,13 +1,21 @@
-const defaultClassName = "material-icons"
+const defaultClassName = 'material-icons'
+import PropTypes from 'prop-types'
 
-export default function IconButton(props) {
+IconButton.propTypes = {
+  type: PropTypes.string,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  icon: PropTypes.string.isRequired
+}
+
+export default function IconButton({ type, className, onClick, icon }) {
   return (
     <button
-      type={props.type}
-      className={`${defaultClassName} ${props.className}`}
-      onClick={props.onClick}
+      type={type}
+      className={`${defaultClassName} ${className}`}
+      onClick={onClick}
     >
-      {props.icon}
+      {icon}
     </button>
   )
 }

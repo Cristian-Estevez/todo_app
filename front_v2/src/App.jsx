@@ -1,42 +1,28 @@
 import './App.css'
-import 'material-icons/iconfont/filled.css';
-import 'material-icons/iconfont/outlined.css';
+import 'material-icons/iconfont/filled.css'
+import 'material-icons/iconfont/outlined.css'
 
-import TitleComponent from './components/TitleComponent';
-import FolderListComponent from './components/FolderListComponent';
-import FolderDetailComponent from './components/FolderDetailComponent';
-import { useFolders } from './hooks/useFolders';
+import { AuthProvider } from './components/auth/AuthProvider'
+import { Routes, Route } from 'react-router-dom'
+import PrivateRoute from './components/router/PrivateRoute'
+import List from './components/List'
+import Login from './components/Login'
 
 export default function App() {
-  const {
-    activeFolder,
-    setActiveFolder,
-    folders,
-    viewFolderDetail,
-    refreshFolderList
-  } = useFolders();
-
-  const viewFolderList = () => {
-    setActiveFolder();
-  };
-
   return (
-    <main
-      className='flex flex-col border-2 p-4 border-emerald-500 bg-emerald-500 bg-opacity-50 rounded-lg'
-    >
-      <TitleComponent
-        viewFolderList={viewFolderList}
-        activeFolder={activeFolder}
-      />
-      {activeFolder ? (
-        <FolderDetailComponent activeFolder={activeFolder} />
-      ) : (
-        <FolderListComponent
-          folders={folders}
-          viewFolderDetail={viewFolderDetail}
-          refreshFolderList={refreshFolderList}
+    <AuthProvider>
+      <Routes>
+        <Route
+          path='/login'
+          element={<Login />}
         />
-      )}
-    </main>
-  );
+        <Route element={<PrivateRoute />}>
+          <Route
+            path='/folders'
+            element={<List />}
+          />
+        </Route>
+      </Routes>
+    </AuthProvider>
+  )
 }

@@ -1,29 +1,41 @@
 - ## Improvements:
 
-  - Improve UX UI
+  - ### Front_v2
 
-  - Add authentication
+    - Add .env file for constants for front_v2
 
-  - Add categories
+    - Improve UX UI
 
-  - Add filtering
+    - Add routing to front_v2
 
-  - ~~Logic deletion instead of real~~
+    - ~~Change favicon~~
 
-  - ~~Change favicon~~
+  - ### Front_v2 and API:
 
-  - Provide option for a noded todo list.
+    - Add filtering
 
-  - Test using npm why doesn't start automatically.
+    - Add authentication
 
-  - Make Dockerable.
+    - Add categories
 
-  - Make it a cellphone app.
+    - Add description to tasks and folders.
 
-  - Share by email.
+    - Share by email.
 
-  - Add description to tasks and folders.
+    - Provide option for a noded todo list.
 
-  - Automate react FE star and eliminate legacy FE.
+  - ### API:
 
-  - ~~Remove django Admin~~
+    - ~~Logic deletion instead of real~~
+
+  - ### Project:
+
+    - Test using npm why doesn't start automatically.
+
+    - Make Dockerable.
+
+    - Make it a cellphone app.
+
+    - Automate react FE star and eliminate legacy FE.
+
+    - ~~Remove django Admin~~

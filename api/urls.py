@@ -14,5 +14,7 @@ urlpatterns = [
     path('folder/task-create/', views.taskCreate, name='task-create'),
     path('folder/task-update/', views.taskUpdate, name='task-update'),
     path('folder/task-delete/', views.taskDelete, name='task-delete'),
+
+    path('login/', views.CustomAuthToken.as_view())
 ]
 
