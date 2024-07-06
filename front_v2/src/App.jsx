@@ -12,10 +12,13 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route
-          path='/login'
-          element={<Login />}
-        />
+        {['/login', '/'].map((path, index) => (
+          <Route
+            key={index}
+            path={path}
+            element={<Login />}
+          />
+        ))}
         <Route element={<PrivateRoute />}>
           <Route
             path='/folders'

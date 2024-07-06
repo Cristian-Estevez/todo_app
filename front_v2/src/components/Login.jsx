@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
-export default function List() {
+export default function Login() {
   const [input, setInput] = useState({
     username: '',
     password: ''
